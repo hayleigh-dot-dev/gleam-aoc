@@ -1,9 +1,11 @@
 import aoc
-import gleam/io
+import aoc/year2022
+import node/promise.{Promise}
 
-pub fn main(argv: List(String)) {
-  assert [year, day, _, ..] = argv
+pub fn main(argv: List(String)) -> Promise(aoc.Solution) {
+  assert [year, day, ..] = argv
 
-  use input <- aoc.puzzle(year, day)
-  io.debug(input)
+  case year {
+    "2022" -> year2022.solve(day)
+  }
 }
