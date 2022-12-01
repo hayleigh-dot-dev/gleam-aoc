@@ -32,8 +32,3 @@ AOC_COOKIE=3408242...
 - `nibble` is a parser combinator library capable of parsing small to medium-sized
   inputs. It's a bit like `nom` in Rust or `parsec` in Haskell, and is particularly
   useful for puzzles with structured input like instructions.
-
-## Extra info
-
-- `aoc` directories are hidden by `.gitignore`. You may want to undo that if you
-  want to commit your solutions.
