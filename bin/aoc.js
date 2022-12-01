@@ -10,7 +10,7 @@ import * as Url from "node:url";
 // This little trick gets them back!
 const here = Url.fileURLToPath(new URL(".", import.meta.url));
 const build_dir = Path.join(here, "../build/dev/javascript/aoc");
-const src_dir = Path.join(here, "../src");
+const src_dir = (global.src_dir = Path.join(here, "../src"));
 
 copy_ffi_files();
 
@@ -23,7 +23,9 @@ const Gleam = await import(gleam);
 const App = await import(entry);
 
 Dotenv.config();
-App.main(Gleam.List.fromArray(Process.argv.slice(2))).then(console.log);
+App.main(Gleam.List.fromArray(Process.argv.slice(2)))
+  .then(console.log)
+  .catch(console.error);
 
 //
 
