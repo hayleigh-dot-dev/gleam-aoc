@@ -2,6 +2,8 @@
 
 ## Quickstart
 
+<img src="https://cdn.mckayla.cloud/-/6289d0b8271940b1ae61bd93c1374c97/Lucy-Advent.svg" width="200" height="200" align="right"/>
+
 - Make sure you have Gleam installed and working.
 
 - Create an empty `dat` directory. This is where your puzzle inputs will be stored.
@@ -30,3 +32,8 @@ AOC_COOKIE=3408242...
 - `nibble` is a parser combinator library capable of parsing small to medium-sized
   inputs. It's a bit like `nom` in Rust or `parsec` in Haskell, and is particularly
   useful for puzzles with structured input like instructions.
+
+## Extra info
+
+- `aoc` directories are hidden by `.gitignore`. You may want to undo that if you
+  want to commit your solutions.
