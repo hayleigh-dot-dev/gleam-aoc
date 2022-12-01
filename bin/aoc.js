@@ -9,7 +9,7 @@ import * as Url from "node:url";
 // You don't get the handy __dirname and __filename variables using esm modules.
 // This little trick gets them back!
 const here = Url.fileURLToPath(new URL(".", import.meta.url));
-const build_dir = Path.join(here, "../build/dev/javascript/main");
+const build_dir = Path.join(here, "../build/dev/javascript/aoc");
 const src_dir = Path.join(here, "../src");
 
 copy_ffi_files();
