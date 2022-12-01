@@ -1,8 +1,22 @@
-import gleam/dynamic.{Dynamic}
 import node/fs
 import node/promise.{Promise, attempt, do, return}
 
-external fn download(year: String, day: String) -> Promise(String, Dynamic) =
+// TYPES -----------------------------------------------------------------------
+
+///
+///
+pub type Solution {
+  Solution(
+    year: Int,
+    day: Int,
+    title: String,
+    solution: #(Int, Int)
+  )
+}
+
+// 
+
+external fn download(year: String, day: String) -> Promise(String) =
   "./aoc.ffi.mjs" "download"
 
 external fn dat() -> String =
@@ -15,7 +29,7 @@ external fn dat() -> String =
 /// and other languages to call a continuation `k`. It's a function that takes
 /// the result of some computation and continues the computation.
 ///
-pub fn puzzle(year: String, day: String, k: fn(String) -> a) -> Promise(a, Dynamic) {
+pub fn puzzle(year: String, day: String, k: fn(String) -> a) -> Promise(a) {
   let path = dat() <> "/" <> year <> "_" <> day <> ".txt"
 
   // Attempt to read the puzzle input from our local cache first. This might fail
