@@ -23,7 +23,7 @@ const Gleam = await import(gleam);
 const App = await import(entry);
 
 Dotenv.config();
-App.main(Gleam.List.fromArray(Process.argv.slice(2)));
+App.main(Gleam.List.fromArray(Process.argv.slice(2))).then(console.log);
 
 //
 
