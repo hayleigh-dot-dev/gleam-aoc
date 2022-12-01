@@ -3,7 +3,7 @@
   "main": "bin/aoc",
   "type": "module",
   "scripts": {
-    "start": "gleam build && ./bin/aoc.js"
+    "start": "gleam build && clear && ./bin/aoc.js"
   },
   "dependencies": {
     "dotenv": "^16.0.3"
