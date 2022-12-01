@@ -1,0 +1,10 @@
+name = "aoc"
+version = "0.1.0"
+target = "javascript"
+
+[dependencies]
+gleam_stdlib = "~> 0.25"
+nibble = "~> 0.2"
+
+[dev-dependencies]
+gleeunit = "~> 0.7"
