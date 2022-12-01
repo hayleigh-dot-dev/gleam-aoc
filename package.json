@@ -1,8 +1,14 @@
 {
   "private": true,
+  "name": "aoc",
   "main": "bin/aoc",
   "type": "module",
+  "bin": "bin/aoc.js",
   "scripts": {
+    "build": "gleam build",
+    "build:clean": "gleam clean && gleam build",
+    "link": "npm link",
+    "unlink": "npm unlink aoc",
     "start": "gleam build && clear && ./bin/aoc.js"
   },
   "dependencies": {
