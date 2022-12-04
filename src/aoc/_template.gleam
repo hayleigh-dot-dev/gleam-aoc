@@ -3,6 +3,7 @@
 import aoc
 import gleam/int
 import gleam/list
+import gleam/option.{Option, Some}
 import gleam/result
 import gleam/string
 import node/promise.{Promise}
@@ -10,15 +11,19 @@ import node/promise.{Promise}
 
 // SOLUTION --------------------------------------------------------------------
 
-pub fn solve() -> Promise(aoc.Solution) {
-  use input <- aoc.puzzle("{{year}}", "{{day}}")
+pub fn solve() -> Promise(aoc.Challenge) {
+  use input <- aoc.puzzle("{{year}}", "{{day}")
   let input = parse_input(input)
 
-  aoc.Solution(
+  aoc.Challenge(
+    title: "",
     year: {{year}},
     day: {{day}},
-    title: "",
-    solution: #(solve_part_one(input), solve_part_two(input))
+    solution: case part {
+      Some("1") -> aoc.Partial(1, solve_part_one(input))
+      Some("2") -> aoc.Partial(2, solve_part_two(input))
+      _ -> aoc.Complete(solve_part_one(input), solve_part_two(input))
+    },
   )
 }
 

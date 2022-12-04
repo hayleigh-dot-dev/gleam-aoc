@@ -1,3 +1,4 @@
+import gleam/string
 import node/fs
 import node/promise.{Promise, attempt, do, return}
 
@@ -5,13 +6,13 @@ import node/promise.{Promise, attempt, do, return}
 
 ///
 ///
+pub type Challenge {
+  Challenge(title: String, year: Int, day: Int, solution: Solution)
+}
+
 pub type Solution {
-  Solution(
-    year: Int,
-    day: Int,
-    title: String,
-    solution: #(Int, Int)
-  )
+  Partial(part: Int, solution: Int)
+  Complete(part_one: Int, part_two: Int)
 }
 
 // 
@@ -29,7 +30,7 @@ external fn dat() -> String =
 /// and other languages to call a continuation `k`. It's a function that takes
 /// the result of some computation and continues the computation.
 ///
-pub fn puzzle(year: String, day: String, k: fn(String) -> a) -> Promise(a) {
+pub fn puzzle(year: String, day: String, solve: fn(String) -> a) -> Promise(a) {
   let path = dat() <> "/" <> year <> "_" <> day <> ".txt"
 
   // Attempt to read the puzzle input from our local cache first. This might fail
@@ -38,7 +39,11 @@ pub fn puzzle(year: String, day: String, k: fn(String) -> a) -> Promise(a) {
   use file <- attempt(fs.read(path))
 
   case file {
-    Ok(input) -> return(k(input))
+    Ok(input) ->
+      input
+      |> string.trim
+      |> solve
+      |> return
 
     // If we don't have this input cached yet, we'll try and download it from the
     // aoc website directly. It's important we remember to write the input to our
@@ -46,7 +51,10 @@ pub fn puzzle(year: String, day: String, k: fn(String) -> a) -> Promise(a) {
     Error(_) -> {
       use input <- do(download(year, day))
       use _ <- do(fs.write(path, input))
-      return(k(input))
+      input
+      |> string.trim
+      |> solve
+      |> return
     }
   }
 }
