@@ -24,8 +24,8 @@ const App = await import(entry);
 
 Dotenv.config();
 App.main(Gleam.List.fromArray(Process.argv.slice(2)))
-  .then(console.log)
-  .catch(console.error);
+  .then((v) => console.log("\n", v, "\n"))
+  .catch((e) => console.error("\n", e, "\n"));
 
 //
 
